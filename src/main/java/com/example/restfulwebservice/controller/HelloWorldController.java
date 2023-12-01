@@ -1,6 +1,6 @@
-package com.example.restfulwebservice.helloworld;
+package com.example.restfulwebservice.controller;
 
-import org.apache.logging.log4j.message.Message;
+import com.example.restfulwebservice.bean.HelloWorldBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.GetMapping;

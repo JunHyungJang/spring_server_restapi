@@ -1,25 +1,28 @@
-package com.example.restfulwebservice.helloworld.user;
+package com.example.restfulwebservice.bean;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.convert.DataSizeUnit;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 //@JsonIgnoreProperties(value={"password","ssn"})
 @NoArgsConstructor
+@Entity
+@Table(name = "users")
 //@JsonFilter("UserInfo")
 public class User {
+    @Schema(title ="사용자 ID", description = "사용자 ID는 자동 생성됩니다")
+    @Id
+    @GeneratedValue
     private Integer id;
 
 //    @Size()/
@@ -29,11 +32,20 @@ public class User {
     @Past()
     private Date joindate;
 
-//    @JsonIgnore
+    @JsonIgnore
     private String password;
-//    @JsonIgnore
+    @JsonIgnore
 
     private String ssn;
 
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
 
+    public User(Integer id, String name, Date joindate, String password, String ssn) {
+        this.id = id;
+        this.name = name;
+        this.joindate = joindate;
+        this.password = password;
+        this.ssn = ssn;
+    }
 }

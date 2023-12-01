@@ -1,9 +1,11 @@
-package com.example.restfulwebservice.helloworld.user;
+package com.example.restfulwebservice.controller;
 
+import com.example.restfulwebservice.bean.User;
+import com.example.restfulwebservice.dao.UserDaoService;
+import com.example.restfulwebservice.bean.UserNotFoundException;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -16,7 +18,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 public class UserController {
     private UserDaoService service;
-    public class MyEntityModel<T> extends EntityModel<T> {
+    public static class MyEntityModel<T> extends EntityModel<T> {
         public MyEntityModel(T content) {
             super(content);
         }
